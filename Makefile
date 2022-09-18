@@ -3,12 +3,12 @@ install:
 		pip install -r requirements.txt
 
 test:
-	python -m pytest -vv test.py
+	python -m pytest -vv test_*.py
 
 format:	
-	black *.py 
+	black *.py
 
 lint:
-	pylint --disable=R,C build_question_answer.py
+	pylint --disable=R,C --ignore-patterns=test_.*?py *.py datasets
 
 all: install lint test

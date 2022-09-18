@@ -1,8 +1,9 @@
-boto3
+pytest
 pylint
 click
-pytest
-pytest-cov
+databricks
+databricks-cli
+ipython
 fastapi
-requests
-openai
+databricks-sql-connector
+databricks-connect==10.4.*
