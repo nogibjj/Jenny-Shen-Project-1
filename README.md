@@ -1,2 +1,2 @@
-# openai-test
-openai-test
+# project 1
+project 1
