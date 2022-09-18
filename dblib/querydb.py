@@ -1,8 +1,11 @@
 from databricks import sql
 import os
+import pandas as pd
+import helpers
 
 
-def querydb(query="SELECT * FROM default.all_stocks_5yr_csv LIMIT 3"):
+def querydb(ticker="AAL"):
+    query = "SELECT * FROM default.all_stocks_5yr_csv where Name = '{}'".format(ticker)
     with sql.connect(
         server_hostname=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
         http_path=os.getenv("DATABRICKS_HTTP_PATH"),
@@ -13,7 +16,11 @@ def querydb(query="SELECT * FROM default.all_stocks_5yr_csv LIMIT 3"):
             cursor.execute(query)
             result = cursor.fetchall()
 
-        for row in result:
-            print(row)
+        # for row in result:
+        #    print(row)
 
-    return result
+    df = pd.DataFrame(result)
+    df.columns = ["date", "open", "high", "low", "close", "volume", "Name"]
+    toReturn = helpers.growth(df, ticker)
+    print(toReturn)
+    return toReturn

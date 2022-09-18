@@ -12,13 +12,13 @@ def cli():
 # build a click command
 @cli.command()
 @click.option(
-    "--query",
-    default="SELECT * FROM default.all_stocks_5yr_csv LIMIT 3;",
-    help="SQL query to execute",
+    "--ticker_name",
+    default="AAL",
+    help="Type the name of the ticker here",
 )
-def cli_query(query):
+def cli_query(ticker_name):
     """Execute a SQL query"""
-    querydb(query)
+    querydb(ticker_name)
 
 
 # run the CLI
